@@ -15,6 +15,9 @@ VOLUME ["/data"]
 # Ensure the SHELL is picked up by grass.
 ENV SHELL /bin/bash
 
+# To avoid bug that uses grass70 to check if GRASS is installed...
+RUN ln -s /usr/bin/grass /usr/bin/grass70
+
 # All commands are executed by grass.
 ENTRYPOINT ["grass"]
 
