@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import os
+import re
+import shutil
+import subprocess
+import sys
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(
+            description='Wrapper for invoking L2A_Process.py from within Docker image',
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+    parser.add_argument('input_dir',
+            help='Sentinel-2 product directory \n' \
+                 '(e.g /tmp/S2A_MSIL1C_20170504T140201_N0205_R024_T21HUB_20170504T140201.SAFE)')
+    parser.add_argument('-f', '--force', action='store_true', default=False,
+            help='Overwrite L2A directory from a previous run, if it already exists')
+
+    args, extra_args = parser.parse_known_args(sys.argv[1:])
+
+    path = args.input_dir
+    output_dir = re.sub("L1C", "L2A", path)
+
+    # Check if there is already a results directory
+    if os.path.exists(output_dir):
+        if not vars(args)['force']:
+            parser.error('{} already exists.\n' \
+                'Use -f/--force to overwrite directory.'.format(output_dir))
+        else:
+            shutil.rmtree(output_dir)
+
+    # Make sure AUX_DATA and HTML directories exist
+    for name in ['AUX_DATA', 'HTML']:
+        os.makedirs(os.path.join(path, name), exist_ok=True)
+
+    dirname, basename = os.path.split(os.path.normpath(path))
+    in_dir = os.path.join('/data', basename)
+
+    cmd = 'docker run --rm -ti ' \
+            '-v /etc/group:/etc/group:ro ' \
+            '-v /etc/passwd:/etc/passwd:ro ' \
+            '-v {vol_dir}:/data ' \
+            '-u {uid}:{gid} ' \
+            'dymaxionlabs/sen2cor {in_dir} {args}'.format(
+                uid=os.getuid(),
+                gid=os.getgid(),
+                vol_dir=dirname,
+                in_dir=in_dir,
+                args=' '.join(extra_args))
+
+    print(cmd)
+    subprocess.call(cmd, shell=True)
