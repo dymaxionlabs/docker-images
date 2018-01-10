@@ -1,8 +1,17 @@
+PREFIX ?= /usr/local
 TAG_NAME := dymaxionlabs/sen2cor
-
-build:
-	docker build -t $(TAG_NAME):latest .
+VERSION = 2.4.0
 
 install:
-	echo "TODO"
-	#install
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	install -m 0755 bin/sen2cor $(DESTDIR)$(PREFIX)/bin/sen2cor
+
+uninstall:
+	@$(RM) $(DESTDIR)$(PREFIX)/bin/ruby-cli-app
+	@docker rmi atomicobject/ruby-cli-app:$(VERSION)
+
+build:
+	@docker build -t $(TAG_NAME):$(VERSION) .
+
+
+.PHONY: install uninstall build
