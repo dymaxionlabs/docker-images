@@ -1,6 +1,6 @@
 PREFIX ?= /usr/local
 TAG_NAME := dymaxionlabs/sen2cor
-VERSION = 2.4.0
+VERSION = 2.5.5
 
 install:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
