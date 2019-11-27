@@ -18,9 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-pyproj \
     && rm -rf /var/lib/apt/lists/*
 
-ENV SEN2COR_VERSION 2.4.0
-ENV SEN2COR_DOWNLOAD_URL "http://step.esa.int/thirdparties/sen2cor/${SEN2COR_VERSION}/Sen2Cor-${SEN2COR_VERSION}-Linux64.run"
-ENV SEN2COR_DOWNLOAD_HASH bb40c8c80aabdd541b067452ef3dcb962465aa6fde529268119081fd6299bbb4
+ENV SEN2COR_VERSION 2.8.0
+ENV SEN2COR_LONG_VERSION 02.08.00
+ENV SEN2COR_DOWNLOAD_URL "http://step.esa.int/thirdparties/sen2cor/${SEN2COR_VERSION}/Sen2Cor-${SEN2COR_LONG_VERSION}-Linux64.run"
+ENV SEN2COR_DOWNLOAD_HASH 0b61f903d96f24f073390330f1cf9bf958ee62eb8ece8f5c6419718c9ae2b21e
 ENV SEN2COR_INSTALLER "Sen2Cor.run"
 
 RUN useradd -ms /bin/bash user && \
