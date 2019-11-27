@@ -18,6 +18,9 @@ if __name__ == '__main__':
                  '(e.g /tmp/S2A_MSIL1C_20170504T140201_N0205_R024_T21HUB_20170504T140201.SAFE)')
     parser.add_argument('-f', '--force', action='store_true', default=False,
             help='Overwrite L2A directory from a previous run, if it already exists')
+    parser.add_argument('--sen2cor-version',
+            help='Sen2cor image version',
+            default='latest')
 
     args, extra_args = parser.parse_known_args(sys.argv[1:])
 
@@ -44,11 +47,12 @@ if __name__ == '__main__':
             '-v /etc/passwd:/etc/passwd:ro ' \
             '-v {vol_dir}:/data ' \
             '-u {uid}:{gid} ' \
-            'dymaxionlabs/sen2cor {in_dir} {args}'.format(
+            'dymaxionlabs/sen2cor:{version} {in_dir} {args}'.format(
                 uid=os.getuid(),
                 gid=os.getgid(),
                 vol_dir=dirname,
                 in_dir=in_dir,
+                version=args.sen2cor_version,
                 args=' '.join(extra_args))
 
     print(cmd)
