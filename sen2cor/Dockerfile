@@ -40,13 +40,18 @@ COPY src/entrypoint.sh /usr/local/bin
 
 VOLUME /data
 
+RUN unset LD_LIBRARY_PATH \
+    unset PYTHONPATH \
+    unset PYTHONHOME \
+    unset PYTHONEXECUTABLE \
+    unset PYTHONUSERBASE
+
 ENV SEN2COR_PATH=/opt/sen2cor \
-    SEN2COR_HOME=/home/user/sen2cor
+    SEN2COR_HOME=/home/user/sen2cor/2.8
 
 ENV SEN2COR_BIN=$SEN2COR_PATH/lib/python2.7/site-packages/sen2cor \
     PATH=$SEN2COR_PATH/bin:${PATH} \
     LD_LIBRARY_PATH=$SEN2COR_PATH/lib:${LD_LIBRARY_PATH} \
-    PYTHONPATH=$SEN2COR_PATH/lib/python2.7:${PYTHONPATH} \
     GDAL_DATA=$SEN2COR_PATH/share/gdal \
     GDAL_DRIVER_PATH=disable \
     LC_NUMERIC=C
