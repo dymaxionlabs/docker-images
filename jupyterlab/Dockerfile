@@ -17,7 +17,7 @@
 # to "gpu".
 ARG IMAGE_TYPE="cpu"
 ARG TF_VERSION="1.15.2"
-FROM gcr.io/kubeflow-images-public/tensorflow-${TF_VERSION}-notebook-${IMAGE_TYPE}:v0.7.0
+FROM gcr.io/kubeflow-images-public/tensorflow-${TF_VERSION}-notebook-${IMAGE_TYPE}:1.0.0
 
 USER root
 
