@@ -1,0 +1,4 @@
+jupyterlab==3.4.7
+pysatproc==0.1.9
+tensorflow==2.10.0
+unetseg==0.2.2
