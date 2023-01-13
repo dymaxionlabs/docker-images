@@ -45,7 +45,7 @@ RUN pip install --upgrade pip \
 # Download and run OTB setup
 USER root
 WORKDIR /opt
-RUN wget -q https://www.orfeo-toolbox.org/packages/$OTB_PACKAGE_NAME.run \
+RUN wget -q https://www.orfeo-toolbox.org/packages/archives/OTB/$OTB_PACKAGE_NAME.run \
 	&& chmod +x ./$OTB_PACKAGE_NAME.run \
 	&& ./$OTB_PACKAGE_NAME.run \
 	&& rm -f $OTB_PACKAGE_NAME.run \
