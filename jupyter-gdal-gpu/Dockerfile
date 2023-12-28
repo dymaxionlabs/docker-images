@@ -1,4 +1,4 @@
-ARG ROOT_CONTAINER=nvidia/cuda:11.5.1-runtime-ubuntu20.04
+ARG ROOT_CONTAINER=nvidia/cuda:11.5.2-runtime-ubuntu20.04
 FROM $ROOT_CONTAINER
 
 LABEL maintainer="Damián Silvani <munshkr@gmail.com>"
