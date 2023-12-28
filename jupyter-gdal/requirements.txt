@@ -1,4 +1,7 @@
-GDAL==3.0.4
-markupsafe==2.0.1
-pysatproc==0.1.9
-unetseg==0.2.2
+fiona
+gdal==3.4.1
+geopandas
+pysatproc
+rasterio
+shapely
+unetseg

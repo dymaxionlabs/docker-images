@@ -1,4 +1,4 @@
-ARG ROOT_CONTAINER=jupyter/minimal-notebook:python-3.8.8
+ARG ROOT_CONTAINER=jupyter/minimal-notebook:python-3.10.11
 FROM $ROOT_CONTAINER
 
 LABEL maintainer="Damián Silvani <munshkr@gmail.com>"
@@ -36,7 +36,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 	&& rm -rf /var/lib/apt/lists/*
 
 ## Install Orfeo Toolbox
-ARG otb_version=8.1.0
+ARG otb_version=8.1.1
 ENV OTB_PACKAGE_NAME=OTB-${otb_version}-Linux64
 # Install numpy (needed for OTB)
 USER ${NB_UID}

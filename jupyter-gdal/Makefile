@@ -1,7 +1,7 @@
 .EXPORT_ALL_VARIABLES:
 
 IMAGE_NAME := jupyter-gdal
-VERSION    := 0.1.0
+VERSION    := python-3.10.11-otb-8.1.1
 
 include .env
 
